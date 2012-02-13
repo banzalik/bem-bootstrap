@@ -1,0 +1,1 @@
+exports.baseTechPath = require.resolve('bem/lib/techs/ie.css');
