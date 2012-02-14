@@ -1,4 +1,4 @@
-all:: bem-bl
+all:: bem-bl 
 all:: $(patsubst %.bemjson.js,%.html,$(wildcard pages/*/*.bemjson.js))
 
 BEM_BUILD=bem build \
@@ -14,7 +14,9 @@ BEM_CREATE=bem create block \
 		-t $1 \
 		$(*F)
 
-%.html: %.bemhtml.js %.css %.js %.ie.css  %.less
+LESS_BUILD= lessc $< $(@D)/$(*F).css
+
+%.html: %.bemhtml.js %.js %.lessbuild
 	$(call BEM_CREATE,bem-bl/blocks-common/i-bem/bem/techs/html.js)
 
 %.bemhtml.js: %.deps.js
@@ -22,6 +24,9 @@ BEM_CREATE=bem create block \
 
 %.deps.js: %.bemdecl.js
 	$(call BEM_BUILD,deps.js)
+	rm $(@D)/$(*F).html
+	rm $(@D)/$(*F).less
+	rm $(@D)/$(*F).js
 
 %.bemdecl.js: %.bemjson.js
 	$(call BEM_CREATE,bemdecl.js)
@@ -34,9 +39,17 @@ BEM_CREATE=bem create block \
 %.ie.css: %.deps.js
 	$(call BEM_BUILD,ie.css)
 
+.PRECIOUS: %.ie.less
+%.ie.less: %.deps.js
+	$(call BEM_BUILD,ie.less)
+
 .PRECIOUS: %.less
 %.less: %.deps.js
 	$(call BEM_BUILD,less)
+
+.PRECIOUS: %.lessbuild
+%.lessbuild: %.less
+	$(call LESS_BUILD,less,css)
 
 .PRECIOUS: %.js
 %.js: %.deps.js
@@ -53,5 +66,6 @@ DO_GIT=@echo -- git $1 $2; \
 
 bem-bl:
 	$(call DO_GIT,git://github.com/bem/bem-bl.git,$@)
+
 
 .PHONY: all
