@@ -6,7 +6,9 @@
         { block: 'i-jquery', elem: 'core'},
         { elem: 'js', url:'index.js'}
     ],
-    content: [
-        'block content'
-    ]
+    content: [{
+        block: 'b-layout',
+        mods: { type: 'fixed'},
+        content: 'b-layout'
+    }]
 })
