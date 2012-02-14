@@ -1,5 +1,7 @@
 ({
     mustDeps: [
-        { block: 'i-responsive'}
+        { block: 'i-variables'},
+        { block: 'i-utilities'},
+        { block: 'i-mixins'}
     ]
 })

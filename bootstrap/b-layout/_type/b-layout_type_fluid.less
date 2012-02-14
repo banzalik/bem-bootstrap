@@ -4,3 +4,50 @@
     padding-right: @gridGutterWidth;
     .clearfix();
 }
+
+// Fluid grid system
+// -------------------------
+#fluidGridSystem {
+  // Setup the mixins to be used
+  .columns(@fluidGridGutterWidth, @fluidGridColumnWidth, @columns) {
+    width: 1% * (@fluidGridColumnWidth * @columns) + (@fluidGridGutterWidth * (@columns - 1));
+  }
+  .gridColumn(@fluidGridGutterWidth) {
+    float: left;
+    margin-left: @fluidGridGutterWidth;
+  }
+  // Take these values and mixins, and make 'em do their thang
+  .generate(@gridColumns, @fluidGridColumnWidth, @fluidGridGutterWidth) {
+    // Row surrounds the columns
+    .b-layout__row_type_fluid {
+      width: 100%;
+      .clearfix();
+
+      // Find all .span# classes within .row and give them the necessary properties for grid columns (supported by all browsers back to IE7, thanks @dhg)
+      > [class*="b-layout__span"] {
+        #fluidGridSystem > .gridColumn(@fluidGridGutterWidth);
+      }
+      > [class*="b-layout__span"]:first-child {
+        margin-left: 0;
+      }
+      // Default columns
+      .b-layout__span_size_1     { #fluidGridSystem > .columns(@fluidGridGutterWidth, @fluidGridColumnWidth, 1); }
+      .b-layout__span_size_2     { #fluidGridSystem > .columns(@fluidGridGutterWidth, @fluidGridColumnWidth, 2); }
+      .b-layout__span_size_3     { #fluidGridSystem > .columns(@fluidGridGutterWidth, @fluidGridColumnWidth, 3); }
+      .b-layout__span_size_4     { #fluidGridSystem > .columns(@fluidGridGutterWidth, @fluidGridColumnWidth, 4); }
+      .b-layout__span_size_5     { #fluidGridSystem > .columns(@fluidGridGutterWidth, @fluidGridColumnWidth, 5); }
+      .b-layout__span_size_6     { #fluidGridSystem > .columns(@fluidGridGutterWidth, @fluidGridColumnWidth, 6); }
+      .b-layout__span_size_7     { #fluidGridSystem > .columns(@fluidGridGutterWidth, @fluidGridColumnWidth, 7); }
+      .b-layout__span_size_8     { #fluidGridSystem > .columns(@fluidGridGutterWidth, @fluidGridColumnWidth, 8); }
+      .b-layout__span_size_9     { #fluidGridSystem > .columns(@fluidGridGutterWidth, @fluidGridColumnWidth, 9); }
+      .b-layout__span_size_10    { #fluidGridSystem > .columns(@fluidGridGutterWidth, @fluidGridColumnWidth, 10); }
+      .b-layout__span_size_11    { #fluidGridSystem > .columns(@fluidGridGutterWidth, @fluidGridColumnWidth, 11); }
+      .b-layout__span_size_12    { #fluidGridSystem > .columns(@fluidGridGutterWidth, @fluidGridColumnWidth, 12); }
+    }
+  }
+}
+
+
+
+#fluidGridSystem > .generate(@gridColumns, @fluidGridColumnWidth, @fluidGridGutterWidth);
+

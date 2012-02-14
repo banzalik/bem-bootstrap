@@ -2,3 +2,61 @@
 {
     .container-fixed();
 }
+
+// Le grid system
+// -------------------------
+#gridSystem {
+  // Setup the mixins to be used
+  .columns(@gridGutterWidth, @gridColumnWidth, @gridRowWidth, @columns) {
+    width: (@gridColumnWidth * @columns) + (@gridGutterWidth * (@columns - 1));
+  }
+  .offset(@gridColumnWidth, @gridGutterWidth, @columns) {
+    margin-left: (@gridColumnWidth * @columns) + (@gridGutterWidth * (@columns - 1)) + (@gridGutterWidth * 2);
+  }
+  .gridColumn(@gridGutterWidth) {
+    float: left;
+    margin-left: @gridGutterWidth;
+  }
+  // Take these values and mixins, and make 'em do their thang
+  .generate(@gridColumns, @gridColumnWidth, @gridGutterWidth) {
+    // Row surrounds the columns
+    .b-layout__row {
+      margin-left: @gridGutterWidth * -1;
+      .clearfix();
+    }
+    // Find all .span# classes within .row and give them the necessary properties for grid columns (supported by all browsers back to IE7, thanks @dhg)
+    [class*="b-layout__span"] {
+      #gridSystem > .gridColumn(@gridGutterWidth);
+    }
+    // Default columns
+    .b-layout__span_size_1     { #gridSystem > .columns(@gridGutterWidth, @gridColumnWidth, @gridRowWidth, 1); }
+    .b-layout__span_size_2     { #gridSystem > .columns(@gridGutterWidth, @gridColumnWidth, @gridRowWidth, 2); }
+    .b-layout__span_size_3     { #gridSystem > .columns(@gridGutterWidth, @gridColumnWidth, @gridRowWidth, 3); }
+    .b-layout__span_size_4     { #gridSystem > .columns(@gridGutterWidth, @gridColumnWidth, @gridRowWidth, 4); }
+    .b-layout__span_size_5     { #gridSystem > .columns(@gridGutterWidth, @gridColumnWidth, @gridRowWidth, 5); }
+    .b-layout__span_size_6     { #gridSystem > .columns(@gridGutterWidth, @gridColumnWidth, @gridRowWidth, 6); }
+    .b-layout__span_size_7     { #gridSystem > .columns(@gridGutterWidth, @gridColumnWidth, @gridRowWidth, 7); }
+    .b-layout__span_size_8     { #gridSystem > .columns(@gridGutterWidth, @gridColumnWidth, @gridRowWidth, 8); }
+    .b-layout__span_size_9     { #gridSystem > .columns(@gridGutterWidth, @gridColumnWidth, @gridRowWidth, 9); }
+    .b-layout__span_size_10    { #gridSystem > .columns(@gridGutterWidth, @gridColumnWidth, @gridRowWidth, 10); }
+    .b-layout__span_size_11    { #gridSystem > .columns(@gridGutterWidth, @gridColumnWidth, @gridRowWidth, 11); }
+    .b-layout__span_size_12,
+    .container { #gridSystem > .columns(@gridGutterWidth, @gridColumnWidth, @gridRowWidth, 12); }
+
+    // Offset column options
+    .b-layout__offset_size_1   { #gridSystem > .offset(@gridColumnWidth, @gridGutterWidth, 1); }
+    .b-layout__offset_size_2   { #gridSystem > .offset(@gridColumnWidth, @gridGutterWidth, 2); }
+    .b-layout__offset_size_3   { #gridSystem > .offset(@gridColumnWidth, @gridGutterWidth, 3); }
+    .b-layout__offset_size_4   { #gridSystem > .offset(@gridColumnWidth, @gridGutterWidth, 4); }
+    .b-layout__offset_size_5   { #gridSystem > .offset(@gridColumnWidth, @gridGutterWidth, 5); }
+    .b-layout__offset_size_6   { #gridSystem > .offset(@gridColumnWidth, @gridGutterWidth, 6); }
+    .b-layout__offset_size_7   { #gridSystem > .offset(@gridColumnWidth, @gridGutterWidth, 7); }
+    .b-layout__offset_size_8   { #gridSystem > .offset(@gridColumnWidth, @gridGutterWidth, 8); }
+    .b-layout__offset_size_9   { #gridSystem > .offset(@gridColumnWidth, @gridGutterWidth, 9); }
+    .b-layout__offset_size_10  { #gridSystem > .offset(@gridColumnWidth, @gridGutterWidth, 10); }
+    .b-layout__offset_size_11  { #gridSystem > .offset(@gridColumnWidth, @gridGutterWidth, 11); }
+  }
+}
+
+#gridSystem > .generate(@gridColumns, @gridColumnWidth, @gridGutterWidth);
+
