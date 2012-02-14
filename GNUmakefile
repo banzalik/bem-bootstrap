@@ -3,6 +3,7 @@ all:: $(patsubst %.bemjson.js,%.html,$(wildcard pages/*/*.bemjson.js))
 
 BEM_BUILD=bem build \
 	-l bem-mini/ \
+	-l bootstrap/ \
 	-l blocks/ \
 	-d $< \
 	-t $1 \
