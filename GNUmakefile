@@ -35,10 +35,12 @@ LESS_BUILD= lessc $< $(@D)/$(*F).css
 .PRECIOUS: %.css
 %.css: %.deps.js
 	$(call BEM_BUILD,css)
+	borschik -t css -i $(@D)/$(*F).css -o $(@D)/_$(*F).css
 
 .PRECIOUS: %.ie.css
 %.ie.css: %.deps.js
 	$(call BEM_BUILD,ie.css)
+	borschik -t css -i $(@D)/$(*F).ie.css -o $(@D)/_$(*F).ie.css
 
 .PRECIOUS: %.ie.less
 %.ie.less: %.deps.js
