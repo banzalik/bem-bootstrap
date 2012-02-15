@@ -25,9 +25,9 @@ LESS_BUILD= lessc $< $(@D)/$(*F).css
 
 %.deps.js: %.bemdecl.js
 	$(call BEM_BUILD,deps.js)
-	rm $(@D)/$(*F).html
-	rm $(@D)/$(*F).less
-	rm $(@D)/$(*F).js
+	if [ -e $(@D)/$(*F).html ]; then rm $(@D)/$(*F).html; fi
+	if [ -e $(@D)/$(*F).less ]; then rm $(@D)/$(*F).less; fi
+	if [ -e $(@D)/$(*F).js ]; then rm $(@D)/$(*F).js; fi
 
 %.bemdecl.js: %.bemjson.js
 	$(call BEM_CREATE,bemdecl.js)
