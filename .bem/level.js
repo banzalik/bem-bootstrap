@@ -1,9 +1,9 @@
 var myPath = require('bem/lib/path');
 
 exports.techs = {
-    'js': '../../bem-mini/i-bem/bem/techs/js.js',
-    'bemhtml': '../../bem-mini/i-bem/bem/techs/bemhtml.js',
-    'less': '../../bem-mini/.bem/techs/less.js'
+    'js': '../bem-mini/i-bem/bem/techs/js.js',
+    'bemhtml': '../bem-mini/i-bem/bem/techs/bemhtml.js',
+    'less': '../bem-mini/.bem/techs/less.js'
 };
 
 for (var alias in exports.techs) {
