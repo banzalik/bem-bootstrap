@@ -1,7 +1,8 @@
 ({
     mustDeps: [
+        { block: 'i-reset'},
         { block: 'i-variables'},
-        { block: 'i-utilities'},
-        { block: 'i-mixins'}
-]
+        { block: 'i-mixins'},
+        { block: 'i-utilities'}
+    ]
 })
